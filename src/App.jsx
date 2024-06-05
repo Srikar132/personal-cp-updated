@@ -58,18 +58,52 @@ function App() {
     { name: "React JS", level: 70 },
   ];
 
-  const linkRef = useRef(null);
   const inputRef = useRef(null);
   const [currentInput, setCurrentInput] = useState("");
   const [history, setHistory] = useState([]);
-  
+  const mahiRef = useRef(null);
   const [initilize, setInitilize] = useState(false);
+  const [ispassCorrect , setIsPassCorrect] = useState(false);
 
-  const handleClick = () => {
-    if(linkRef.current) {
-      linkRef.current.click();
+  useEffect( () => {
+    if (ispassCorrect) {
+      const response = (
+        <div>
+          <p>
+            Maheshwari, there's something truly special about you that I can't
+            help but admire. Your smile lights up the darkest days, and your
+            kindness touches everyone around you. Your intelligence and grace
+            are qualities that I deeply respect, and they make you even more
+            captivating. Spending time with you is like a breath of fresh air,
+            and I cherish every moment we share. You bring so much joy and
+            positivity into my life, and I can't help but feel incredibly
+            fortunate to know someone as wonderful as you.
+          </p>
+          <p>
+            I've always admired the way you bring light into every room with
+            your smile and your kind spirit. Your intelligence and warmth are
+            truly inspiring, and I feel incredibly lucky to know you. Every
+            moment spent with you feels like a beautiful adventure, and I can't
+            help but be captivated by your charm and grace. You make the world a
+            better place just by being in it, and I can't imagine my life
+            without the joy and happiness you bring
+          </p>
+        </div>
+      );
+  
+      setHistory((prevHistory) => {
+        let updatedHistory = [...prevHistory];
+        updatedHistory[prevHistory.length - 1] = {
+          command : "maheshwari",
+          response : response
+        };
+
+        return updatedHistory;
+      }
+      );
     }
-  }
+  }, [ispassCorrect]);
+
 
   useEffect(() => {
     if (inputRef) {
@@ -80,6 +114,16 @@ function App() {
   const handleInputChange = (e) => {
     setCurrentInput(e.target.value);
   };
+
+  const handlePass = (e) => {
+    e.preventDefault();
+    if(mahiRef.current.value == "srinivas-m-8885598145"){
+      setIsPassCorrect(p => p = true);
+    }else {
+      setIsPassCorrect(p => p =false);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentInput.trim()) {
@@ -89,7 +133,9 @@ function App() {
   };
 
   const processCommand = (command) => {
-    if (command.trim() === "clear") {
+
+    command = command.trim().toLowerCase();
+    if (command === "clear") {
       setHistory([]);
       return;
     }
@@ -103,7 +149,6 @@ function App() {
         command === "sr -m init" ||
         command === "sr -m --commands" ||
         command === "contact" ||
-        command === "m" ||
         command === "maheshwari" ||
         command === "sr -m @open sr/hrt/rm4"
        ) {
@@ -195,14 +240,28 @@ function App() {
               </div>
             );
             break;
-
-          case "m" :
-          case "maheshwari":
-            temp_response = <div className="grid gap-[20px]">
-              <p>I've always admired the way you bring light into every room with your smile and your kind spirit. Your intelligence and warmth are truly inspiring, and I feel incredibly lucky to know you. Every moment spent with you feels like a beautiful adventure, and I can't help but be captivated by your charm and grace. You make the world a better place just by being in it, and I can't imagine my life without the joy and happiness you bring</p>
-              <p>Maheswari, there's something truly special about you that I can't help but admire. Your smile lights up the darkest days, and your kindness touches everyone around you. Your intelligence and grace are qualities that I deeply respect, and they make you even more captivating. Spending time with you is like a breath of fresh air, and I cherish every moment we share. You bring so much joy and positivity into my life, and I can't help but feel incredibly fortunate to know someone as wonderful as you.</p>
-            </div>;
-            break;
+            case "sr -m main -v":
+              case "maheshwari":
+                temp_response = (
+                  <div className="grid gap-[20px]">
+                    <form className="grid grid-cols-3" onSubmit={handlePass}>
+                      <input
+                        placeholder="enter password"
+                        className="bg-black col-span-2 w-full  input h-[20px] pl-2 text-customLightGray"
+                        type="password"
+                        autoFocus
+                        ref={mahiRef}
+                      />
+                      <button
+                        className="bg-black hover:text-white h-[20px] text-customLightGray"
+                        type="submit"
+                      >
+                        submit
+                      </button>
+                    </form>
+                  </div>
+                );
+                break;
         }
 
 
@@ -346,7 +405,7 @@ function App() {
               <span>
                 type{" ["}
                 <span className="text-lightOrange tracking-tighter">
-                  sr - m init
+                  sr -m init
                 </span>{"] "}
                 := to initilize bash
               </span>
@@ -375,8 +434,8 @@ function App() {
   };
 
   return (
-    <div className="main-container fixed top-0 left-0 right-0  flex items-center justify-center h-screen">
-      <div className=" Container grid  p-1 pl-3 h-[90vh] sm:h-auto sm:max-h-[90vh]     w-[700px]  text-white ">
+    <div className="main-container fixed top-0 left-0 right-0  flex sm:items-center sm:justify-center h-screen">
+      <div className=" Container  grid  p-1 pl-3  h-[85vh] sm:h-auto sm:max-h-[90vh]     w-[700px]  text-white ">
         <header className="flex flex-col    font-black">
           <h1 className="">
             <span className="text-purple-200 text-6xl font-black tracking-tighter">
@@ -393,7 +452,7 @@ function App() {
           </h1>
           {/* <div className='linker text-2xl'><span className='text-customVlightGray'>Visit </span><a className='text-blue-400 underline ' href="#" >Normal website</a></div> */}
         </header>
-        <main className="w-full text-white overflow-scroll">
+        <main className="w-full  text-white overflow-scroll">
           <div>
             {history.map((item, index) => (
               <div key={index} className="text-customVlightGray">
@@ -424,7 +483,7 @@ function App() {
               className="bg-black input  h-[20px] pl-2 text-customLightGray"
               value={currentInput}
               onChange={handleInputChange}
-              autoFocus
+              
               id="command"
               ref={inputRef}
               spellCheck="false"

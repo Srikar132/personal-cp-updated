@@ -81,5 +81,11 @@ form {
 
 } 
 
+@media ( max-width : 350px ){
+    .Container header h1 span {
+        font-size: 25px;
+    }
 
+    
+}
 

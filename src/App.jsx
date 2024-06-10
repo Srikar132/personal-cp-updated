@@ -176,7 +176,7 @@ function App() {
             temp_response = (
               <div>
                 <span className="text-green-400">bash is initilized</span> <br />
-                <span>type [<span className="text-lightOrange tracking-tighter">sr -m --commands</span>] := commands</span>
+                <span>type <span className="text-lightOrange tracking-tighter">sr -m --commands</span> for existing commands</span>
               </div>
             )
             break;
@@ -240,8 +240,7 @@ function App() {
               </div>
             );
             break;
-            case "sr -m main -v":
-              case "maheshwari":
+            case "sr -m mahi":
                 temp_response = (
                   <div className="grid gap-[20px]">
                     <form className="grid grid-cols-3" onSubmit={handlePass}>
@@ -256,7 +255,7 @@ function App() {
                         className="bg-black hover:text-white h-[20px] text-customLightGray"
                         type="submit"
                       >
-                        submit
+                        continue
                       </button>
                     </form>
                   </div>
@@ -281,7 +280,7 @@ function App() {
           case "help":
             response = (
               <div>
-                <span>type [<span className="text-lightOrange">sr -m --commands</span>] :=  dislpay commands</span>
+                <span>type <span className="text-lightOrange">sr -m --commands</span> to  dislpay commands</span>
                 
               </div>
             );
@@ -320,7 +319,7 @@ function App() {
                   frameworks like{" "}
                   <a href="https://react.dev/" target="_blank">
                     ReactJS
-                  </a>{" "}
+                  </a>{" "} (JS library)
                   and{" "}
                   <a href="https://tailwindcss.com/" target="_blank">
                     Tailwind CSS
@@ -365,11 +364,11 @@ function App() {
             break;
           case "sri charan":
             response =
-              "sri charan is my brother , he is currently studying 9th standarad in sri harshavardhana school at rajanagaram , ofcourse i too completed my schooling their....";
+              "sri charan is my brother , he is currently studying 9th standarad in sri harshavardhana school at rajanagaram , ofcourse i too completed my schooling there....";
             break;
           case "mahi":
             response =
-              "mahi is my brother , he is currently studying 7th standarad in sri harshavardhana school at rajanagaram , ofcourse i too completed my schooling their....";
+              "mahi is my brother , he is currently studying 7th standarad in sri harshavardhana school at rajanagaram , ofcourse i too completed my schooling there....";
             break;
           case "skills":
             response = <div>{<GetSkills skills={skills} />}</div>;
@@ -403,11 +402,11 @@ function App() {
           response: (
             <div className="grid">
               <span>
-                type{" ["}
+                type{" "}
                 <span className="text-lightOrange tracking-tighter">
                   sr -m init
-                </span>{"] "}
-                := to initilize bash
+                </span>{" "}
+                 to initilize bash
               </span>
             </div>
           ),
